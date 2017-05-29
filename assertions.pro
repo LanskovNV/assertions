@@ -9,3 +9,7 @@ SOURCES += main.c \
 HEADERS += \
     assertions-system.h \
     types.h
+
+debug {
+DEFINES += DEBUG
+}

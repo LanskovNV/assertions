@@ -2,25 +2,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 #include "types.h"
 
-#define NDEBUG  // rerease mode
+//#define _NDEBUG  // uncomment to debug
 #include "assertions-system.h"
 
 #define VAL 10
 
 int main(void)
 {
-  int x, res = VAL;
+  int x = 5, y = 2, res = VAL;
 
-  srand(time(0));
-  x = rand() % 2;
+  FatalError(x != 0);
+  FatalError(y != 0);
 
-  //FatalError(x != 0);
-  Assert(x != 0);
-
+  Assert(x != 5);
   res /= x;
-  printf("otvet: %i\n", &x);
+  Assert(y != 2);
+  res /= y;
+
+  printf("answer: %i\n", res);
 
   return 0;
 } /* end of main */

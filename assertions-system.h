@@ -4,15 +4,21 @@
 
 #define NUM_OF_ASSERTS 2
 #define ASSERT_MESSAGE "Assert was detected, what go you want to do?\n"
-
-/* to switch off debug mode */
-#ifdef NDEBUG
-#define Assert(ignore)((void) 0)
-#endif
+#define ERROR_MESSAGE "Error detected, program will be closed\n"
 
 /* functions */
-void SystemOpen();
-void systemClose();
-void Assert();
-void FatalError();
+INFO_t InfoInit(int file, int line, char *message);
+void AssertFunc(BOOL_t condition, INFO_t info);
+void FatalErrorFunc(BOOL_t condition, INFO_t info);
+
+/* to switch off debug mode */
+#define FatalError(x) \
+  FatalErrorFunc(x, InfoInit(__FILE__, __LINE__, ERROR_MESSAGE));
+#ifdef _NDEBUG
+#define Assert(x)
+#else
+#define Assert(x) \
+    AssertFunc(x, InfoInit(__FILE__, __LINE__, ASSERT_MESSAGE));
+#endif
+
 #endif // ASSERTIONSSYSTEM_H

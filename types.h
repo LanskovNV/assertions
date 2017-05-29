@@ -6,5 +6,11 @@ typedef enum {
   TRUE
 }BOOL_t;
 
+typedef struct {
+  char *message;
+  int fileName;
+  int line;
+  int func;
+}INFO_t;
 
 #endif // TYPES_H
