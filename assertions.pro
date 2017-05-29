@@ -7,4 +7,5 @@ SOURCES += main.c \
     assertions-system.c
 
 HEADERS += \
-    assertions-system.h
+    assertions-system.h \
+    types.h
