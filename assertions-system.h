@@ -8,7 +8,7 @@
 
 /* functions */
 INFO_t InfoInit(int file, int line, char *message);
-void AssertFunc(BOOL_t condition, INFO_t info);
+void AssertFunc(BOOL_t condition, INFO_t info, BOOL_t assertFlag);
 void FatalErrorFunc(BOOL_t condition, INFO_t info);
 
 /* to switch off debug mode */
@@ -18,7 +18,10 @@ void FatalErrorFunc(BOOL_t condition, INFO_t info);
 #define Assert(x)
 #else
 #define Assert(x) \
-    AssertFunc(x, InfoInit(__FILE__, __LINE__, ASSERT_MESSAGE));
+   {              \
+     static BOOL_t assertFlag = TRUE; \
+     AssertFunc(x, InfoInit(__FILE__, __LINE__, ASSERT_MESSAGE), assertFlag); \
+   }
 #endif
 
 #endif // ASSERTIONSSYSTEM_H

@@ -4,6 +4,7 @@
 #include <string.h>
 #include "assertions-system.h"
 #include "types.h"
+
 INFO_t InfoInit(int file, int line, char *message)
 {
   INFO_t info;
@@ -16,11 +17,11 @@ INFO_t InfoInit(int file, int line, char *message)
   return info;
 } /* end of function */
 
-void AssertFunc(BOOL_t condition, INFO_t info)
+void AssertFunc(BOOL_t condition, INFO_t info, BOOL_t assertFlag)
 {
   static BOOL_t flag = TRUE;
 
-  if (flag)
+  if (flag && assertFlag)
   {
     if (!condition)
       {
@@ -31,6 +32,7 @@ void AssertFunc(BOOL_t condition, INFO_t info)
         switch (getchar())
         {
         case '0':
+          assertFlag = FALSE;
           getchar();
           break;
         case '1':
